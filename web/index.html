@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>图片转字符画</title>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <header class="top">
+      <p class="mark">Ptasc</p>
+      <h1>图片转字符画</h1>
+    </header>
+
+    <main class="workspace">
+      <form id="controls" class="panel" aria-labelledby="controls-title">
+        <h2 id="controls-title">参数</h2>
+
+        <label id="dropzone" class="dropzone">
+          <img id="thumb" class="thumb" alt="原图预览" hidden />
+          <span id="drop-label">拖入图片，或点击选择</span>
+          <span id="drop-hint" class="hint">也可以直接粘贴截图</span>
+          <input
+            id="file-input"
+            class="visually-hidden"
+            type="file"
+            name="image"
+            accept="image/*"
+            aria-describedby="drop-hint"
+          />
+        </label>
+        <button id="sample" class="text-button" type="button">使用示例图片</button>
+
+        <div class="field">
+          <label for="columns">列数 <output id="columns-value" for="columns">80</output></label>
+          <input
+            id="columns"
+            name="columns"
+            type="range"
+            min="20"
+            max="200"
+            value="80"
+            data-unit="列"
+          />
+        </div>
+
+        <div class="field">
+          <span id="charset-label">字符集</span>
+          <div class="charset-picker">
+            <button
+              id="charset-button"
+              type="button"
+              aria-haspopup="listbox"
+              aria-expanded="false"
+              aria-controls="charset-list"
+              aria-labelledby="charset-label charset-name charset-sample"
+            >
+              <span id="charset-name" data-charset-name>标准</span>
+              <span id="charset-sample" class="charset-sample" data-charset-sample></span>
+              <span class="charset-chevron" aria-hidden="true"></span>
+            </button>
+            <ul id="charset-list" role="listbox" aria-labelledby="charset-label" hidden></ul>
+            <select id="charset" name="charset" class="visually-hidden" tabindex="-1" aria-hidden="true">
+              <option value="simple">简约</option>
+              <option value="standard">标准</option>
+              <option value="detailed">精细</option>
+              <option value="blocks">色块</option>
+              <option value="steps">阶梯</option>
+              <option value="braille">盲文</option>
+              <option value="custom">自定义</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="ramp">字符坡道（疏到密）</label>
+          <input
+            id="ramp"
+            name="ramp"
+            type="text"
+            maxlength="120"
+            spellcheck="false"
+            autocomplete="off"
+            autocorrect="off"
+            autocapitalize="none"
+            enterkeyhint="done"
+          />
+        </div>
+
+        <label class="check" for="invert">
+          <input id="invert" name="invert" type="checkbox" />
+          <span>反色，适合深色背景</span>
+        </label>
+
+        <div class="exports">
+          <button id="copy" type="button" disabled>复制</button>
+          <button id="download" type="button" disabled>下载 TXT</button>
+          <button id="save" type="button" disabled>保存</button>
+        </div>
+      </form>
+
+      <section class="plate" aria-labelledby="preview-title">
+        <div class="plate-bar">
+          <h2 id="preview-title">预览</h2>
+          <p id="status" role="status">先放入一张图片</p>
+          <div class="field font-size">
+            <label for="font-size">字号 <output id="font-size-value" for="font-size">11</output></label>
+            <input
+              id="font-size"
+              name="font-size"
+              type="range"
+              min="6"
+              max="18"
+              value="11"
+              data-unit="像素"
+            />
+          </div>
+        </div>
+        <pre id="ascii" class="ascii light">字符画会显示在这里</pre>
+      </section>
+    </main>
+    <script type="module" src="/js/app.js"></script>
+  </body>
+</html>

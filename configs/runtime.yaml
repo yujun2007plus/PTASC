@@ -1,0 +1,5 @@
+# 字符画参数。亮背景用 invert: false（亮→疏，暗→密）。
+columns: 80
+char_aspect: 2.0
+ramp: " .:-=+*#%@"
+invert: false
