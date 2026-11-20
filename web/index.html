@@ -9,23 +9,28 @@
   <body>
     <header class="top">
       <p class="mark">Ptasc</p>
-      <h1>图片转字符画</h1>
+      <h1 id="page-title">图片转字符画</h1>
     </header>
 
     <main class="workspace">
       <form id="controls" class="panel" aria-labelledby="controls-title">
         <h2 id="controls-title">参数</h2>
+        <div class="mode" role="group" aria-label="转换类型">
+          <button id="mode-image" type="button" aria-pressed="true">图片</button>
+          <button id="mode-video" type="button" aria-pressed="false">视频</button>
+        </div>
 
         <label id="dropzone" class="dropzone">
           <img id="thumb" class="thumb" alt="原图预览" hidden />
+          <video id="clip" class="thumb" muted autoplay loop playsinline hidden></video>
           <span id="drop-label">拖入图片，或点击选择</span>
           <span id="drop-hint" class="hint">也可以直接粘贴截图</span>
           <input
             id="file-input"
-            class="visually-hidden"
+            class="file-input"
             type="file"
             name="image"
-            accept="image/*"
+            accept=".png,.jpg,.jpeg,.gif,.webp,.bmp,.tif,.tiff"
             aria-describedby="drop-hint"
           />
         </label>
@@ -95,6 +100,7 @@
         <div class="exports">
           <button id="copy" type="button" disabled>复制</button>
           <button id="download" type="button" disabled>下载 TXT</button>
+          <button id="full" type="button" hidden disabled>转换</button>
           <button id="save" type="button" disabled>保存</button>
         </div>
       </form>
@@ -112,11 +118,13 @@
               min="6"
               max="18"
               value="11"
-              data-unit="像素"
             />
           </div>
         </div>
-        <pre id="ascii" class="ascii light">字符画会显示在这里</pre>
+        <div class="stage">
+          <pre id="ascii" class="ascii light is-placeholder">字符画会显示在这里</pre>
+          <video id="result" class="result" controls playsinline hidden></video>
+        </div>
       </section>
     </main>
     <script type="module" src="/js/app.js"></script>

@@ -5,9 +5,9 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "ptasc"
 version = "0.1.0"
-description = "Convert an image to ASCII art"
+description = "Convert an image or a video into ASCII art"
 requires-python = ">=3.10"
-dependencies = ["pillow>=9"]
+dependencies = ["pillow>=9", "opencv-python-headless>=4.9", "imageio-ffmpeg>=0.5"]
 
 [tool.setuptools.packages.find]
 where = ["src"]

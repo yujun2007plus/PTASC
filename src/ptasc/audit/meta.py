@@ -23,8 +23,10 @@ def build_meta(
     invert: bool,
     tool_version: str,
     created_at: str,
+    output: str = "ascii.txt",
+    extra: dict[str, object] | None = None,
 ) -> dict[str, object]:
-    return {
+    meta = {
         "task_id": task_id,
         "source_name": source_name,
         "source_sha256": source_sha256,
@@ -33,10 +35,13 @@ def build_meta(
         "char_aspect": char_aspect,
         "ramp": ramp,
         "invert": invert,
-        "output": "ascii.txt",
+        "output": output,
         "tool_version": tool_version,
         "created_at": created_at,
     }
+    if extra:
+        meta.update(extra)
+    return meta
 
 
 def write_meta(path: Path, meta: dict[str, object]) -> None:

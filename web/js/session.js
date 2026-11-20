@@ -9,9 +9,6 @@ export function startSession(els) {
   let timer = 0;
   let requestSerial = 0;
 
-  els.save.addEventListener("click", () => {
-    void saveCurrent();
-  });
   els.form.addEventListener("submit", (event) => event.preventDefault());
 
   function scheduleConvert() {
@@ -27,6 +24,12 @@ export function startSession(els) {
   function onFile(file) {
     currentFile = file;
     scheduleConvert();
+  }
+
+  function clear() {
+    currentFile = null;
+    requestSerial += 1;
+    window.clearTimeout(timer);
   }
 
   async function postImage(path, options) {
@@ -97,5 +100,5 @@ export function startSession(els) {
     els.status.title = payload.task_id;
   }
 
-  return { onFile, scheduleConvert };
+  return { onFile, scheduleConvert, save: saveCurrent, clear };
 }

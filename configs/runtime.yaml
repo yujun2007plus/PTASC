@@ -3,3 +3,9 @@ columns: 80
 char_aspect: 2.0
 ramp: " .:-=+*#%@"
 invert: false
+# 页面预览只抽前面这一小段。点「转换」才会处理整段视频。
+video_fps: 8
+video_max_frames: 120
+video_max_seconds: 15
+video_max_edge: 480
+video_cell_px: 10

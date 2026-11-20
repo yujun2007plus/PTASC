@@ -38,3 +38,6 @@ def test_repository_runtime_yaml_loads():
     assert settings.char_aspect == 2.0
     assert settings.ramp.startswith(" ")
     assert settings.invert is False
+    assert settings.video_fps == 8
+    assert settings.video_max_frames == 120
+    assert settings.video_max_edge == 480

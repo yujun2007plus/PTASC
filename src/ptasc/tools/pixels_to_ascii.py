@@ -3,7 +3,7 @@
 from PIL import Image
 
 
-def pixels_to_ascii(image: Image.Image, ramp: str, invert: bool) -> str:
+def pixels_to_ascii(image: Image.Image, ramp: str, invert: bool, *, stretch: bool = True) -> str:
     if not ramp:
         raise ValueError("字符坡道不能为空")
     gray = image if image.mode == "L" else image.convert("L")
@@ -11,8 +11,9 @@ def pixels_to_ascii(image: Image.Image, ramp: str, invert: bool) -> str:
     pixels = list(read_pixels())
     if not pixels:
         raise ValueError("图片没有像素")
-    low = min(pixels)
-    high = max(pixels)
+    # 视频逐帧拉伸会让亮度跳变，所以视频用 0–255 的固定刻度。
+    low = min(pixels) if stretch else 0
+    high = max(pixels) if stretch else 255
     span = high - low or 1
     last = len(ramp) - 1
     width, height = gray.size

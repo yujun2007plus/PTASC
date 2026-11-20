@@ -71,6 +71,7 @@ h2 {
 }
 
 .dropzone {
+  position: relative;
   min-height: 11rem;
   border: 1px solid var(--line);
   display: grid;
@@ -81,6 +82,21 @@ h2 {
   cursor: pointer;
   background: var(--surface);
   padding: 0.75rem;
+}
+
+.dropzone .file-input {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.dropzone .file-input:focus {
+  outline: none;
 }
 
 .dropzone.dragging {
@@ -101,7 +117,28 @@ h2 {
   border: 1px solid var(--line);
 }
 
+.mode {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+}
+
+.mode button {
+  min-height: 3rem;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--fg);
+  cursor: pointer;
+}
+
+.mode button[aria-pressed="true"] {
+  background: var(--accent);
+  color: var(--on-accent);
+  border-color: var(--accent);
+}
+
 .text-button,
+.mode button,
 .exports button,
 input,
 select {
@@ -326,8 +363,12 @@ input[type="range"]::-moz-range-thumb {
   gap: 0.5rem;
 }
 
+#full,
 #save {
   grid-column: 1 / -1;
+}
+
+#save {
   background: var(--accent);
   color: var(--on-accent);
   border-color: var(--accent);
@@ -375,9 +416,24 @@ input[type="range"]::-moz-range-thumb {
   justify-content: space-between;
 }
 
-.ascii {
+.stage {
+  min-height: 0;
   margin: 0 0.75rem 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   overflow: auto;
+}
+
+.result {
+  max-width: 100%;
+  max-height: 100%;
+  background: var(--night);
+}
+
+.ascii {
+  margin: 0;
+  width: max-content;
   padding: 0.75rem;
   font-family: ui-monospace, "Cascadia Mono", Consolas, monospace;
   line-height: 1.15;
@@ -387,6 +443,7 @@ input[type="range"]::-moz-range-thumb {
 
 .ascii-row {
   display: block;
+  width: max-content;
   min-height: 1.15em;
   animation: settle 180ms linear both;
 }
